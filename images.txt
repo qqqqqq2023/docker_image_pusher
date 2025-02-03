@@ -1,9 +1,13 @@
 
+# 拉取 kavita 镜像
+--platform=linux/arm64 jvmilazz0/kavita
+
+
 # 拉取 portainer 镜像
---platform=linux/arm64 portainer/portainer:latest
+# --platform=linux/arm64 portainer/portainer:latest
 
 # 拉取calibre 镜像
-#--platform=linux/arm64 linuxserver/calibre-web:nightly
+# --platform=linux/arm64 linuxserver/calibre-web:nightly
 
 # 拉取 lanraragi_cn 镜像
-#--platform=linux/arm64 windycloud/lanraragi_cn:v.0.9.0
+# --platform=linux/arm64 windycloud/lanraragi_cn:v.0.9.0
