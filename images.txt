@@ -1,5 +1,5 @@
 # 拉取calibre 镜像
-linuxserver/calibre-web:arm64v8-nightly-efc7ce31-ls257
+linuxserver/calibre-web:arm64v8-nightly
 
 # 拉取 lanraragi_cn 镜像
 --platform=linux/arm64 windycloud/lanraragi_cn:v.0.9.0
