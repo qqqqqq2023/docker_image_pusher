@@ -18,6 +18,11 @@ jobs:
     name: Pull
     runs-on: ubuntu-latest
     steps:
+    - name: set time
+      run: |
+        TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+        echo "TIME=$TIME" >> $GITHUB_ENV
+        
     - name: Before freeing up disk space
       run: |
         echo "Before freeing up disk space"
@@ -143,6 +148,22 @@ jobs:
             docker tag $image $new_image
             echo "docker push $new_image"
             docker push $new_image
+
+
+            echo "Time is : $TIME"
+            
+            # 将 docker pull 命令写入 result.txt 中
+            echo $TIME >> result.txt
+            echo "=============================================================================="  >> result.txt
+            echo "docker pull $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> result.txt
+            echo "docker tag $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag $image" >> result.txt
+            echo "docker rmi  $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> result.txt
+            echo "=============================================================================="  >> result.txt
+            echo ""  >> result.txt
+            echo ""  >> result.txt
+
+
+            
             echo "开始清理磁盘空间"
             echo "=============================================================================="
             df -hT
@@ -155,3 +176,11 @@ jobs:
             echo "=============================================================================="     
             
         done < images.txt
+
+    - name: Commit & Push
+      uses: Andro999b/push@v1.3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
+        force: true
+        message: 'Overwritten by Github Actions - ${{ env.TIME }}'
