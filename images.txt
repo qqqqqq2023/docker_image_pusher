@@ -1,1 +1,3 @@
 
+# 拉取 emby/embyserver:4.9.1.8 镜像
+emby/embyserver:4.9.1.8
