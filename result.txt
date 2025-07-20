@@ -7,3 +7,19 @@ docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker
 ==============================================================================
 
 
+2025-07-21 02:19:20
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_amd64_portainer:latest
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_amd64_portainer:latest portainer/portainer:latest
+docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_amd64_portainer:latest
+==============================================================================
+ 
+ 
+2025-07-21 02:19:20
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_portainer:latest
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_portainer:latest portainer/portainer:latest
+docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_portainer:latest
+==============================================================================
+ 
+ 
