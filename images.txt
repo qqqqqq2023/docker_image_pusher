@@ -1,1 +1,4 @@
 
+# 拉取 portainer 镜像
+--platform=linux/amd64 portainer/portainer:latest
+--platform=linux/arm64 portainer/portainer:latest
