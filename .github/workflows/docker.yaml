@@ -159,8 +159,8 @@ jobs:
             echo "docker tag $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag $image" >> result.txt
             echo "docker rmi  $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> result.txt
             echo "=============================================================================="  >> result.txt
-            echo ""  >> result.txt
-            echo ""  >> result.txt
+            echo " "  >> result.txt
+            echo " "  >> result.txt
 
 
             
