@@ -1,4 +1,6 @@
 
 # 拉取 portainer 镜像
---platform=linux/amd64 portainer/portainer:latest
---platform=linux/arm64 portainer/portainer:latest
+# --platform=linux/amd64 portainer/portainer:latest
+# --platform=linux/arm64 portainer/portainer:latest
+
+--platform=linux/arm64 siguremo/yutto:2.0.3
