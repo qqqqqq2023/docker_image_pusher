@@ -39,3 +39,11 @@ docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker
 ==============================================================================
  
  
+2025-10-20 21:58:16
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/aria2:latest
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/aria2:latest superng6/aria2:latest
+docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/aria2:latest
+==============================================================================
+ 
+ 
