@@ -1,6 +1,10 @@
 
-# 2025-10-20 komga
-superng6/aria2:latest
+
+# 2025-10-20 alpine Linux轻量级镜像
+alpine
+
+# 2025-10-20 aria2 放弃
+# superng6/aria2:latest
 
 # 2025-10-20 komga
 # gotson/komga:1.x
