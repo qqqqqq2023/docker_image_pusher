@@ -96,7 +96,7 @@ write_image_info() {
     print_info "正在写入新的镜像信息 $IMAGE_NAME ..."
     # 第一行写入注释：yyyy-MM-dd 的时间 + 镜像名称
     echo "# $TIMESTAMP $IMAGE_NAME" > images.txt
-    echo "$IMAGE_NAME" > images.txt
+    echo "$IMAGE_NAME" >> images.txt
     print_success "镜像信息 $IMAGE_NAME 已写入 images.txt"
 }
 
@@ -122,7 +122,7 @@ git_operations() {
     
     # 推送到远程仓库
     print_info "正在推送到远程仓库..."
-    git push
+    git push origin dev
     if [ $? -ne 0 ]; then
         print_error "Git push 操作失败"
         exit 1
@@ -136,15 +136,15 @@ wait_for_action_completion() {
     print_info "等待GitHub Action执行..."
     print_warning "这可能需要几分钟时间，请耐心等待..."
     
-    local max_attempts=30  # 最大尝试次数（30 * 20秒 = 10分钟）
+    local max_attempts=6  # 最大尝试次数（6 * 10秒 = 1分钟）
     local attempt=1
-    local wait_seconds=20
+    local wait_seconds=10
     
     while [ $attempt -le $max_attempts ]; do
         print_info "检查更新... ($attempt/$max_attempts)"
         
         # 拉取最新更改
-        git pull --quiet
+        git pull origin dev --quiet
         
         # 检查result.txt是否有内容（GitHub Action写入的结果）
         if [ -s "result.txt" ]; then
