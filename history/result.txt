@@ -81,3 +81,13 @@ docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker
  
  
 
+=== Backup at 2025-10-23 23:14:34 ===
+2025-10-23 22:59:50
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/nginx:latest
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/nginx:latest nginx:latest
+docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/nginx:latest
+==============================================================================
+ 
+ 
+
