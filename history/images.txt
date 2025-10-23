@@ -1,0 +1,24 @@
+=== Backup at 2025-10-23 23:42:34 ===
+# 2025-10-23 memos
+# neosmemo/memos:0.24
+# neosmemo/memos:0.24.2
+
+# 2025-10-22 memos
+# neosmemo/memos:stable
+
+# 2025-10-20 alpine Linux轻量级镜像
+# alpine
+
+# 2025-10-20 aria2 放弃
+# superng6/aria2:latest
+
+# 2025-10-20 komga
+# gotson/komga:1.x
+
+
+# 拉取 portainer 镜像
+# --platform=linux/amd64 portainer/portainer:latest
+# --platform=linux/arm64 portainer/portainer:latest
+
+# --platform=linux/arm64 siguremo/yutto:2.0.3
+
