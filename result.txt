@@ -1,8 +1,0 @@
-2025-10-23 23:14:57
-==============================================================================
-docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/redis:latest
-docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/redis:latest redis:latest
-docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/redis:latest
-==============================================================================
- 
- 
