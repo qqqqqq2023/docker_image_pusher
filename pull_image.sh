@@ -127,6 +127,8 @@ git_operations() {
         print_error "Git push 操作失败"
         exit 1
     fi
+
+    sleep 20
     
     print_success "Git操作完成，已推送到远程仓库"
 }
@@ -136,9 +138,9 @@ wait_for_action_completion() {
     print_info "等待GitHub Action执行..."
     print_warning "这可能需要几分钟时间，请耐心等待..."
     
-    local max_attempts=6  # 最大尝试次数（6 * 10秒 = 1分钟）
+    local max_attempts=9  # 最大尝试次数（9 * 20秒 = 3分钟）
     local attempt=1
-    local wait_seconds=10
+    local wait_seconds=20
     
     while [ $attempt -le $max_attempts ]; do
         print_info "检查更新... ($attempt/$max_attempts)"
