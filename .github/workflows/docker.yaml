@@ -3,7 +3,7 @@ name: Docker
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 
 
 env:
@@ -181,6 +181,6 @@ jobs:
       uses: Andro999b/push@v1.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
+        branch: dev
         force: true
         message: 'Overwritten by Github Actions - ${{ env.TIME }}'
