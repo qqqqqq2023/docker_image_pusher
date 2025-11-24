@@ -1,2 +1,2 @@
-# 2025-10-23 python:3.11.14-slim
-python:3.11.14-slim
+# 2025-11-24 python:3.9-alpine
+python:3.9-alpine
