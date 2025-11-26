@@ -1,2 +1,2 @@
-# 2025-11-27 --platform linux/arm64 nginx:perl
---platform linux/arm64 nginx:perl
+# 2025-11-27 redis:8.4.0
+redis:8.4.0
