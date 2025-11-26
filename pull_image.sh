@@ -3,6 +3,8 @@
 # 脚本名称: pull_image.sh
 # 功能: 封装Git操作，处理镜像更新流程
 # 使用方法: sh pull_image.sh [镜像名称]
+# 默认架构: sh pull_images.sh python:3.9-alpine
+# 指定架构: sh pull_image.sh "--platform linux/arm64 python:3.9-alpine"
 
 # 设置颜色输出
 RED='\033[0;31m'
@@ -32,7 +34,8 @@ print_error() {
 if [ $# -eq 0 ]; then
     print_error "请指定镜像名称！"
     echo "使用方法: $0 [镜像名称]"
-    echo "示例: $0 nginx"
+    echo "示例(默认架构): sh $0 nginx"
+    echo "示例(指定架构): sh $0 \"--platform linux/arm64 nginx\""
     exit 1
 fi
 
