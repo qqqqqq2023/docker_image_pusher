@@ -42,3 +42,7 @@ python:3.9-alpine
 # 2025-11-26 --platform linux/arm64 python:3.9-alpine
 --platform linux/arm64 python:3.9-alpine
 
+=== Backup at 2025-11-27 01:44:07 ===
+# 2025-11-27 nginx:perl
+nginx:perl
+
