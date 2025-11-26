@@ -132,3 +132,13 @@ docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker
  
  
 
+=== Backup at 2025-11-27 01:50:16 ===
+2025-11-27 01:47:48
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/nginx:perl
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/nginx:perl nginx:perl
+docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/nginx:perl
+==============================================================================
+ 
+ 
+
