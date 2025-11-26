@@ -38,3 +38,7 @@ python:3.9-alpine
 # 2025-11-26 --platform
 --platform
 
+=== Backup at 2025-11-27 01:39:32 ===
+# 2025-11-26 --platform linux/arm64 python:3.9-alpine
+--platform linux/arm64 python:3.9-alpine
+
