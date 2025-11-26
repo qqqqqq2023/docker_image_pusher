@@ -54,3 +54,7 @@ nginx:perl
 # 2025-11-27 --platform linux/arm64 nginx:perl
 --platform linux/arm64 nginx:perl
 
+=== Backup at 2025-11-27 01:55:11 ===
+# 2025-11-27 redis:8.4.0
+redis:8.4.0
+
