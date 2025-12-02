@@ -1,0 +1,8 @@
+2025-12-02 13:03:57
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/ezbookkeeping:SNAPSHOT-20251201
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/ezbookkeeping:SNAPSHOT-20251201 ezbookkeeping:SNAPSHOT-20251201
+docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/ezbookkeeping:SNAPSHOT-20251201
+==============================================================================
+ 
+ 
