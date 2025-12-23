@@ -1,2 +1,2 @@
-# 2025-12-24 --platform linux/arm64 danielwhatmuff/7z-docker
---platform linux/arm64 danielwhatmuff/7z-docker
+# 2025-12-24 --platform linux/arm64 crazymax/7zip
+--platform linux/arm64 crazymax/7zip

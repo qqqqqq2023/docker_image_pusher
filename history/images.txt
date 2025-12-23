@@ -74,3 +74,7 @@ nginx
 # 2025-12-02 mayswind/ezbookkeeping:SNAPSHOT-20251201
 mayswind/ezbookkeeping:SNAPSHOT-20251201
 
+=== Backup at 2025-12-24 01:16:22 ===
+# 2025-12-24 --platform linux/arm64 danielwhatmuff/7z-docker
+--platform linux/arm64 danielwhatmuff/7z-docker
+
