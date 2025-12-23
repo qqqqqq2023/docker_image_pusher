@@ -70,3 +70,7 @@ redis:8.4.0
 # 2025-11-27 nginx
 nginx
 
+=== Backup at 2025-12-24 01:11:07 ===
+# 2025-12-02 mayswind/ezbookkeeping:SNAPSHOT-20251201
+mayswind/ezbookkeeping:SNAPSHOT-20251201
+

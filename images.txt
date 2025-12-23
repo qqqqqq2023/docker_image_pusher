@@ -1,2 +1,2 @@
-# 2025-12-02 mayswind/ezbookkeeping:SNAPSHOT-20251201
-mayswind/ezbookkeeping:SNAPSHOT-20251201
+# 2025-12-24 --platform linux/arm64 danielwhatmuff/7z-docker
+--platform linux/arm64 danielwhatmuff/7z-docker
