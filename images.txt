@@ -1,2 +1,2 @@
-# 2025-12-29 hello-world:latest
-hello-world:latest
+# 2025-12-29 --platform linux/arm64 hello-world:latest
+--platform linux/arm64 hello-world:latest
