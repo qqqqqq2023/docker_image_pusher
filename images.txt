@@ -1,2 +1,2 @@
-# 2025-12-24 --platform linux/arm64 crazymax/7zip
---platform linux/arm64 crazymax/7zip
+# 2025-12-29 cm2network/steamcmd
+cm2network/steamcmd
