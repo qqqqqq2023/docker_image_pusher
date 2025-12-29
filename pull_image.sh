@@ -55,36 +55,12 @@ check_files() {
         touch result.txt
     fi
     
-    if [ ! -d "history" ]; then
-        print_warning "history 目录不存在，正在创建..."
-        mkdir history
+    if [ ! -f "data.txt" ]; then
+        print_warning "data.txt 文件不存在，正在创建..."
+        touch data.txt
     fi
 }
 
-# 备份文件到历史记录
-backup_files() {
-    print_info "正在备份文件到历史记录..."
-    
-    # 备份 images.txt
-    if [ -s "images.txt" ]; then
-        echo "=== Backup at $CURRENT_DATE ===" >> history/images.txt
-        cat images.txt >> history/images.txt
-        echo "" >> history/images.txt
-        print_success "images.txt 已备份到 history/images.txt"
-    else
-        print_warning "images.txt 为空，跳过备份"
-    fi
-    
-    # 备份 result.txt
-    if [ -s "result.txt" ]; then
-        echo "=== Backup at $CURRENT_DATE ===" >> history/result.txt
-        cat result.txt >> history/result.txt
-        echo "" >> history/result.txt
-        print_success "result.txt 已备份到 history/result.txt"
-    else
-        print_warning "result.txt 为空，跳过备份"
-    fi
-}
 
 # 清空当前文件
 clear_files() {
@@ -103,13 +79,12 @@ write_image_info() {
     print_success "镜像信息 $IMAGE_NAME 已写入 images.txt"
 }
 
-
 # Git操作
 git_operations() {
     print_info "开始Git操作..."
     
     # 添加文件到暂存区
-    git add images.txt result.txt history/
+    git add .
     if [ $? -ne 0 ]; then
         print_error "Git add 操作失败"
         exit 1
@@ -140,64 +115,89 @@ git_operations() {
 wait_for_action_completion() {
     print_info "等待GitHub Action执行..."
     print_warning "这可能需要几分钟时间，请耐心等待..."
+    print_warning "您可以前往GitHub仓库的Actions页面查看执行进度"
     
-    local max_attempts=9  # 最大尝试次数（9 * 20秒 = 3分钟）
+    local max_attempts=12  # 增加尝试次数（12 * 20秒 = 4分钟）
     local attempt=1
     local wait_seconds=20
+    local action_completed=false
     
     while [ $attempt -le $max_attempts ]; do
-        print_info "检查更新... ($attempt/$max_attempts)"
+        print_info "第 $attempt 次检查... (已等待 $(( (attempt-1) * wait_seconds )) 秒)"
+        print_info "正在拉取最新代码以获取GitHub Action执行结果..."
         
         # 拉取最新更改
-        git pull origin main --quiet
+        git pull origin main --quiet 2>/dev/null
         
         # 检查result.txt是否有内容（GitHub Action写入的结果）
-        if [ -s "result.txt" ]; then
-            print_success "GitHub Action 已完成执行"
-            return 0
+        if [ -f "result.txt" ] && [ -s "result.txt" ]; then
+            print_success "✅ GitHub Action 执行完成！"
+            action_completed=true
+            break
         fi
         
-        # 显示等待进度
-        echo -n "."
+        print_warning "GitHub Action 仍在执行中，等待 ${wait_seconds} 秒后再次检查..."
+        echo "----------------------------------------"
         sleep $wait_seconds
         ((attempt++))
     done
     
-    print_error "等待超时，GitHub Action 可能执行失败"
-    return 1
+    if [ "$action_completed" = false ]; then
+        print_error "❌ 等待超时，GitHub Action 可能执行失败"
+        print_warning "建议："
+        print_warning "1. 请前往GitHub仓库的Actions页面查看执行状态"
+        print_warning "2. 检查网络连接是否正常"
+        print_warning "3. 稍后手动执行 git pull 查看结果"
+        return 1
+    fi
+    
+    return 0
 }
 
 # 显示最终结果
 show_result() {
     print_info "=== 最终结果 ==="
     if [ -f "result.txt" ] && [ -s "result.txt" ]; then
-        echo "result.txt 内容:"
+        echo "📋 result.txt 内容:"
+        echo "----------------------------------------"
         cat result.txt
-        print_success "操作完成！"
+        echo "----------------------------------------"
+        print_success "🎉 操作完成！镜像已成功处理。"
     else
-        print_warning "result.txt 为空或不存在"
+        print_warning "⚠️  result.txt 为空或不存在"
     fi
 }
 
 # 主函数
 main() {
-    print_info "开始处理镜像: $IMAGE_NAME"
-    print_info "当前时间: $CURRENT_DATE"
+    print_info "🚀 开始处理镜像: $IMAGE_NAME"
+    print_info "📅 当前时间: $CURRENT_DATE"
+    echo "========================================"
     
     # 检查Git仓库状态
     if [ ! -d ".git" ]; then
-        print_error "当前目录不是Git仓库！"
+        print_error "❌ 当前目录不是Git仓库！"
         exit 1
     fi
     
     # 执行各个步骤
     check_files
-    backup_files
     clear_files
     write_image_info
     git_operations
-    wait_for_action_completion
-    show_result
+    
+    # 等待GitHub Action完成
+    if wait_for_action_completion; then
+        echo "========================================"
+        print_success "✅ GitHub Action 已成功完成"
+        show_result
+    else
+        echo "========================================"
+        print_error "❌ GitHub Action 未完成，无法获取结果"
+        print_warning "⚠️  跳过 show_result 步骤"
+    fi
+    
+    print_info "📊 脚本执行完成"
 }
 
 # 异常处理

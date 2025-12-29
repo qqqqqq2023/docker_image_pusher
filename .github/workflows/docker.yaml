@@ -163,6 +163,24 @@ jobs:
             echo " "  >> result.txt
 
 
+            # 2025-12-29 将镜像信息写入 data.txt 中
+            echo "=============================================================================="  >> data.txt
+            echo "DATE:" >> data.txt
+            echo $TIME >> data.txt
+            echo "=========="  >> data.txt
+            echo "IMAGE:" >> data.txt
+            echo $line >> data.txt
+            echo "=========="  >> data.txt
+            echo "SCRIPT:" >> data.txt
+            echo "docker pull $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> data.txt
+            echo "docker tag $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag $platform_prefix$image_name_tag" >> data.txt
+            echo "docker rmi  $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> data.txt
+            echo " "  >> data.txt
+            echo "=========="  >> data.txt
+            echo " "  >> data.txt
+            echo " "  >> data.txt
+
+
             
             echo "开始清理磁盘空间"
             echo "=============================================================================="
