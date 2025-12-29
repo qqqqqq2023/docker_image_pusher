@@ -565,46 +565,41 @@
                 const versions = filteredGroups[imageName];
                 const hasMultipleVersions = versions.length > 1;
                 
-                html += `
-                    <div class="image-group" data-image="${imageName}">
-                        <div class="group-header">
-                            <i class="fas fa-cube image-icon"></i>
-                            <h3>${imageName}</h3>
-                        </div>
-                `;
+                html += `<div class="image-group" data-image="${imageName}">`;
+                html += `<div class="group-header">`;
+                html += `<i class="fas fa-cube image-icon"></i>`;
+                html += `<h3>${imageName}</h3>`;
+                html += `</div>`;
                 
                 // 如果有多个版本，添加版本选择器
                 if (hasMultipleVersions) {
-                    html += `
-                        <div class="version-selector">
-                            <select class="version-dropdown">
-                                ${versions.map((version, index) => `
-                                    <option value="${index}" ${index === 0 ? 'selected' : ''}>
-                                        ${version.fullImage} (${version.date})
-                                    </option>
-                                `).join('')}
-                            </select>
-                        </div>
-                    `;
+                    html += `<div class="version-selector">`;
+                    html += `<select class="version-dropdown">`;
+                    versions.forEach((version, index) => {
+                        html += `<option value="${index}" ${index === 0 ? 'selected' : ''}>`;
+                        html += `${version.fullImage} (${version.date})`;
+                        html += `</option>`;
+                    });
+                    html += `</select>`;
+                    html += `</div>`;
                 }
                 
                 // 版本信息和脚本区域
-                html += `
-                        <div class="version-info">
-                            <div class="version-date">
-                                <i class="far fa-calendar-alt"></i>
-                                ${versions[0].date}
-                            </div>
-                            <div class="click-to-copy">
-                                <i class="fas fa-mouse-pointer"></i>
-                                点击脚本复制
-                            </div>
-                        </div>
-                        <div class="version-script" data-image="${imageName}" data-version-index="0">
-                            ${versions[0].script}
-                        </div>
-                    </div>
-                `;
+                html += `<div class="version-info">`;
+                html += `<div class="version-date">`;
+                html += `<i class="far fa-calendar-alt"></i>`;
+                html += versions[0].date;
+                html += `</div>`;
+                html += `<div class="click-to-copy">`;
+                html += `<i class="fas fa-mouse-pointer"></i>`;
+                html += `点击脚本复制`;
+                html += `</div>`;
+                html += `</div>`;
+                html += `<div class="version-script" data-image="${imageName}" data-version-index="0">`;
+                // 这里不添加缩进，直接写入脚本内容
+                html += escapeHtml(versions[0].script);
+                html += `</div>`;
+                html += `</div>`;
             });
             
             container.innerHTML = html;
@@ -643,6 +638,13 @@
                     scriptElement.setAttribute('data-version-index', versionIndex);
                 });
             });
+        }
+
+        // 转义 HTML 特殊字符
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // 复制文本到剪贴板
@@ -693,12 +695,7 @@
             
             // 为每个镜像添加筛选按钮（如果还没有）
             imageNames.forEach(imageName => {
-                if (!existingFilters.includes(imageName.toLowerCase()) && 
-                    imageName.toLowerCase() !== 'all' &&
-                    imageName.toLowerCase() !== 'hello-world' &&
-                    imageName.toLowerCase() !== 'steamcmd' &&
-                    imageName.toLowerCase() !== 'cm2network') {
-                    
+                if (!existingFilters.includes(imageName.toLowerCase())) {
                     const button = document.createElement('button');
                     button.className = 'filter-btn';
                     button.setAttribute('data-filter', imageName.toLowerCase());
