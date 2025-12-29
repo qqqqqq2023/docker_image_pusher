@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker 镜像脚本管理器 | GitHub Pages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        
+        h1 {
+            color: #2496ed;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .github-info {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 800px;
+            font-size: 0.95rem;
+        }
+        
+        .github-info i {
+            color: #2496ed;
+            margin-right: 8px;
+        }
+        
+        .docker-icon {
+            color: #2496ed;
+            margin-right: 10px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            flex-grow: 1;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #2496ed;
+            box-shadow: 0 0 0 3px rgba(36, 150, 237, 0.1);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover {
+            background-color: #f0f8ff;
+            border-color: #2496ed;
+        }
+        
+        .filter-btn.active {
+            background-color: #2496ed;
+            color: white;
+            border-color: #2496ed;
+        }
+        
+        .image-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .image-group {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .image-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .group-header {
+            background-color: #2496ed;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .group-header h3 {
+            font-size: 1.4rem;
+            margin-left: 10px;
+            word-break: break-all;
+        }
+        
+        .image-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .version-list {
+            padding: 0;
+        }
+        
+        .version-item {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+        
+        .version-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .version-item:last-child {
+            border-bottom: none;
+        }
+        
+        .version-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .version-date i {
+            margin-right: 8px;
+        }
+        
+        .version-script {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 15px 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            max-height: 150px;
+            overflow: hidden;
+        }
+        
+        .version-script.expanded {
+            max-height: none;
+            overflow: auto;
+        }
+        
+        .version-script:hover {
+            background-color: #f0f8ff;
+            border-color: #cce5ff;
+        }
+        
+        .copy-btn {
+            background-color: #2496ed;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1a7bc9;
+        }
+        
+        .copy-btn i {
+            margin-right: 8px;
+        }
+        
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+        
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .copy-notification i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e4e8;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2496ed;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .image-groups {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-cube docker-icon"></i>Docker 镜像脚本管理器</h1>
+            <p class="subtitle">管理您的 Docker 镜像迁移脚本。点击脚本区域查看完整内容，然后点击复制按钮将脚本复制到剪贴板。</p>
+            
+            <div class="github-info">
+                <p><i class="fas fa-info-circle"></i>此页面托管在 GitHub Pages 上，数据来自 <code>data.txt</code> 文件。</p>
+                <p><i class="fas fa-mouse-pointer"></i>点击脚本区域展开/收起完整脚本，点击复制按钮复制到剪贴板。</p>
+            </div>
+        </header>
+        
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="搜索镜像或脚本内容...">
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">全部镜像</button>
+                <button class="filter-btn" data-filter="hello-world">hello-world</button>
+                <button class="filter-btn" data-filter="steamcmd">steamcmd</button>
+                <button class="filter-btn" data-filter="cm2network">cm2network</button>
+            </div>
+        </div>
+        
+        <div class="image-groups" id="imageGroups">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>正在加载数据...</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>数据来源: <code>data.txt</code> | 托管于 GitHub Pages | 点击脚本区域可查看完整内容，然后点击复制按钮复制到剪贴板</p>
+        </footer>
+    </div>
+    
+    <div class="copy-notification" id="copyNotification">
+        <i class="fas fa-check-circle"></i>
+        <span>脚本已复制到剪贴板！</span>
+    </div>
+
+    <script>
+        // 从 data.txt 文件加载数据
+        async function loadDataFromFile() {
+            try {
+                const response = await fetch('data.txt');
+                if (!response.ok) {
+                    throw new Error(`HTTP 错误! 状态: ${response.status}`);
+                }
+                const text = await response.text();
+                return parseDataFile(text);
+            } catch (error) {
+                console.error('加载数据文件时出错:', error);
+                // 显示错误信息
+                document.getElementById('imageGroups').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>无法加载数据文件</h3>
+                        <p>错误: ${error.message}</p>
+                        <p>请确保 data.txt 文件与 index.html 在同一目录下。</p>
+                    </div>
+                `;
+                return [];
+            }
+        }
+
+        // 解析 data.txt 文件内容
+        function parseDataFile(text) {
+            const entries = [];
+            // 按分隔符分割数据块
+            const blocks = text.split('==============================================================================\n').filter(block => block.trim());
+            
+            for (const block of blocks) {
+                try {
+                    // 提取日期
+                    const dateMatch = block.match(/DATE:\s*(.+?)\s*==========/s);
+                    if (!dateMatch) continue;
+                    
+                    // 提取镜像名称
+                    const imageMatch = block.match(/IMAGE:\s*(.+?)\s*==========/s);
+                    if (!imageMatch) continue;
+                    
+                    // 提取脚本
+                    const scriptMatch = block.match(/SCRIPT:\s*([\s\S]+?)\s*==========/s);
+                    if (!scriptMatch) continue;
+                    
+                    entries.push({
+                        date: dateMatch[1].trim(),
+                        image: imageMatch[1].trim(),
+                        script: scriptMatch[1].trim()
+                    });
+                } catch (err) {
+                    console.warn('解析数据块时出错:', err);
+                }
+            }
+            
+            // 如果没有解析到数据，使用示例数据
+            if (entries.length === 0) {
+                console.log('未解析到数据，使用示例数据');
+                return getSampleData();
+            }
+            
+            return entries;
+        }
+
+        // 示例数据（备用）
+        function getSampleData() {
+            return [
+                {
+                    date: "2025-12-29 23:19:12",
+                    image: "cm2network/steamcmd",
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd steamcmd\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd`
+                },
+                {
+                    date: "2025-12-29 23:32:44",
+                    image: "hello-world:latest",
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest hello-world:latest\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest`
+                },
+                {
+                    date: "2025-12-29 23:37:28",
+                    image: "--platform linux/arm64 hello-world:latest",
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest linux_arm64_hello-world:latest\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest`
+                },
+                {
+                    date: "2025-12-29 23:45:28",
+                    image: "hello-world:linux",
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux hello-world:linux\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux`
+                },
+                {
+                    date: "2025-12-29 23:49:11",
+                    image: "--platform linux/arm64 hello-world:linux",
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux linux_arm64_hello-world:linux\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux`
+                }
+            ];
+        }
+
+        // 按镜像名称分组数据
+        function groupDataByImage(data) {
+            const groups = {};
+            
+            data.forEach(item => {
+                // 提取基础镜像名称
+                let baseImage = item.image;
+                
+                // 处理包含 --platform 的情况
+                if (baseImage.includes('--platform')) {
+                    // 移除 --platform linux/arm64 部分
+                    baseImage = baseImage.replace(/--platform\s+linux\/arm64\s*/, '');
+                }
+                
+                // 提取镜像名称（去除标签）
+                const imageName = baseImage.split(':')[0];
+                
+                if (!groups[imageName]) {
+                    groups[imageName] = [];
+                }
+                
+                groups[imageName].push(item);
+            });
+            
+            return groups;
+        }
+
+        // 渲染镜像组
+        function renderImageGroups(groups, filter = 'all', searchTerm = '') {
+            const container = document.getElementById('imageGroups');
+            
+            // 过滤和搜索数据
+            let filteredGroups = {};
+            Object.keys(groups).forEach(imageName => {
+                if (filter !== 'all' && !imageName.toLowerCase().includes(filter.toLowerCase())) {
+                    return;
+                }
+                
+                const filteredVersions = groups[imageName].filter(version => {
+                    // 搜索镜像名称、完整镜像字符串或脚本内容
+                    if (searchTerm === '') return true;
+                    
+                    const searchLower = searchTerm.toLowerCase();
+                    return version.image.toLowerCase().includes(searchLower) || 
+                           version.script.toLowerCase().includes(searchLower) ||
+                           imageName.toLowerCase().includes(searchLower);
+                });
+                
+                if (filteredVersions.length > 0) {
+                    filteredGroups[imageName] = filteredVersions;
+                }
+            });
+            
+            // 如果没有匹配的结果
+            if (Object.keys(filteredGroups).length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>未找到匹配的镜像</h3>
+                        <p>尝试使用不同的搜索词或筛选条件</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 渲染每个镜像组
+            let html = '';
+            Object.keys(filteredGroups).forEach(imageName => {
+                html += `
+                    <div class="image-group">
+                        <div class="group-header">
+                            <i class="fas fa-cube image-icon"></i>
+                            <h3>${imageName}</h3>
+                        </div>
+                        <div class="version-list">
+                `;
+                
+                // 添加每个版本
+                filteredGroups[imageName].forEach(version => {
+                    html += `
+                        <div class="version-item">
+                            <div class="version-date">
+                                <i class="far fa-calendar-alt"></i>
+                                ${version.date}
+                            </div>
+                            <div class="image-full-name"><strong>完整镜像:</strong> ${version.image}</div>
+                            <div class="version-script" title="点击展开/收起完整脚本">${version.script}</div>
+                            <button class="copy-btn" data-script="${encodeURIComponent(version.script)}">
+                                <i class="far fa-copy"></i> 复制脚本
+                            </button>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // 为脚本区域添加点击事件（展开/收起）
+            document.querySelectorAll('.version-script').forEach(scriptElement => {
+                scriptElement.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+            
+            // 为复制按钮添加事件监听器
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const script = decodeURIComponent(this.getAttribute('data-script'));
+                    copyToClipboard(script);
+                });
+            });
+        }
+
+        // 复制文本到剪贴板
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showCopyNotification();
+            }).catch(err => {
+                // 如果clipboard API失败，使用传统方法
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyNotification();
+            });
+        }
+
+        // 显示复制成功通知
+        function showCopyNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', async function() {
+            // 从文件加载数据
+            const data = await loadDataFromFile();
+            
+            if (data.length === 0) {
+                return; // 加载失败，已显示错误信息
+            }
+            
+            // 按镜像分组数据
+            const groupedData = groupDataByImage(data);
+            
+            // 获取所有镜像名称用于筛选按钮
+            const imageNames = Object.keys(groupedData);
+            
+            // 更新筛选按钮（除了已有的）
+            const filterButtonsContainer = document.querySelector('.filter-buttons');
+            const existingFilters = Array.from(filterButtonsContainer.querySelectorAll('.filter-btn'))
+                .map(btn => btn.getAttribute('data-filter'));
+            
+            // 为每个镜像添加筛选按钮（如果还没有）
+            imageNames.forEach(imageName => {
+                if (!existingFilters.includes(imageName.toLowerCase()) && 
+                    imageName.toLowerCase() !== 'all' &&
+                    imageName.toLowerCase() !== 'hello-world' &&
+                    imageName.toLowerCase() !== 'steamcmd' &&
+                    imageName.toLowerCase() !== 'cm2network') {
+                    
+                    const button = document.createElement('button');
+                    button.className = 'filter-btn';
+                    button.setAttribute('data-filter', imageName.toLowerCase());
+                    button.textContent = imageName;
+                    filterButtonsContainer.appendChild(button);
+                }
+            });
+            
+            // 初始渲染
+            renderImageGroups(groupedData);
+            
+            // 搜索功能
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                renderImageGroups(groupedData, getActiveFilter(), this.value);
+            });
+            
+            // 筛选按钮功能
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // 移除其他按钮的active类
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // 为当前按钮添加active类
+                    this.classList.add('active');
+                    
+                    // 重新渲染
+                    renderImageGroups(groupedData, this.getAttribute('data-filter'), searchInput.value);
+                });
+            });
+            
+            // 获取当前活动的筛选器
+            function getActiveFilter() {
+                const activeButton = document.querySelector('.filter-btn.active');
+                return activeButton ? activeButton.getAttribute('data-filter') : 'all';
+            }
+        });
+    </script>
+</body>
+</html>
