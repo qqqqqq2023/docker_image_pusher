@@ -157,7 +157,7 @@ jobs:
             echo "=============================================================================="  >> result.txt
             echo "docker pull $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> result.txt
             echo "docker tag $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag $platform_prefix$image_name_tag" >> result.txt
-            echo "docker rmi  $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> result.txt
+            echo "docker rmi $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> result.txt
             echo " "  >> result.txt
             echo "=============================================================================="  >> result.txt
 
@@ -173,7 +173,7 @@ jobs:
             echo "SCRIPT:" >> data.txt
             echo "docker pull $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> data.txt
             echo "docker tag $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag $platform_prefix$image_name_tag" >> data.txt
-            echo "docker rmi  $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> data.txt
+            echo "docker rmi $ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag" >> data.txt
             echo " "  >> data.txt
             echo "=========="  >> data.txt
             echo " "  >> data.txt

@@ -1,2 +1,0 @@
-# 2025-12-29 hello-world:linux
-hello-world:linux
