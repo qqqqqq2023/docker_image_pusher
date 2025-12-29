@@ -1,2 +1,2 @@
-# 2025-12-30 --platform linux/arm64 crazymax/7zip
---platform linux/arm64 crazymax/7zip
+# 2025-12-30 python:3.9-alpine
+python:3.9-alpine
