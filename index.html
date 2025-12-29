@@ -431,7 +431,7 @@
                     entries.push({
                         date: dateMatch[1].trim(),
                         image: imageMatch[1].trim(),
-                        script: scriptMatch[1].trim()
+                        script: scriptMatch[1]
                     });
                 } catch (err) {
                     console.warn('解析数据块时出错:', err);
