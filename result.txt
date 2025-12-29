@@ -1,0 +1,7 @@
+2025-12-29 23:45:28
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux hello-world:linux
+docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux
+ 
+==============================================================================
