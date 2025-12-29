@@ -170,28 +170,40 @@
             flex-shrink: 0;
         }
         
-        .version-list {
-            padding: 0;
-        }
-        
-        .version-item {
-            padding: 20px;
+        .version-selector {
+            padding: 15px 20px;
             border-bottom: 1px solid #f0f0f0;
-            transition: background-color 0.2s;
-        }
-        
-        .version-item:hover {
             background-color: #f9f9f9;
         }
         
-        .version-item:last-child {
-            border-bottom: none;
+        .version-dropdown {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .version-dropdown:focus {
+            outline: none;
+            border-color: #2496ed;
+            box-shadow: 0 0 0 3px rgba(36, 150, 237, 0.1);
+        }
+        
+        .version-info {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .version-date {
             color: #666;
             font-size: 0.9rem;
-            margin-bottom: 8px;
             display: flex;
             align-items: center;
         }
@@ -200,54 +212,43 @@
             margin-right: 8px;
         }
         
+        .click-to-copy {
+            color: #2496ed;
+            font-size: 0.85rem;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+        }
+        
+        .click-to-copy i {
+            margin-right: 5px;
+        }
+        
         .version-script {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            padding: 15px;
+            padding: 20px;
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
             white-space: pre-wrap;
             word-break: break-all;
-            margin: 15px 0;
             cursor: pointer;
-            position: relative;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
             transition: all 0.2s;
-            max-height: 150px;
-            overflow: hidden;
-        }
-        
-        .version-script.expanded {
-            max-height: none;
-            overflow: auto;
+            line-height: 1.5;
         }
         
         .version-script:hover {
             background-color: #f0f8ff;
-            border-color: #cce5ff;
         }
         
-        .copy-btn {
-            background-color: #2496ed;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+        .version-script.copied {
+            background-color: #e8f5e9;
+            animation: highlight 1s ease-out;
         }
         
-        .copy-btn:hover {
-            background-color: #1a7bc9;
-        }
-        
-        .copy-btn i {
-            margin-right: 8px;
+        @keyframes highlight {
+            0% { background-color: #e8f5e9; }
+            100% { background-color: #f8f9fa; }
         }
         
         .copy-notification {
@@ -344,11 +345,11 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-cube docker-icon"></i>Docker 镜像脚本管理器</h1>
-            <p class="subtitle">管理您的 Docker 镜像迁移脚本。点击脚本区域查看完整内容，然后点击复制按钮将脚本复制到剪贴板。</p>
+            <p class="subtitle">管理您的 Docker 镜像迁移脚本。点击脚本区域直接复制脚本到剪贴板。</p>
             
             <div class="github-info">
                 <p><i class="fas fa-info-circle"></i>此页面托管在 GitHub Pages 上，数据来自 <code>data.txt</code> 文件。</p>
-                <p><i class="fas fa-mouse-pointer"></i>点击脚本区域展开/收起完整脚本，点击复制按钮复制到剪贴板。</p>
+                <p><i class="fas fa-mouse-pointer"></i>点击脚本区域直接复制到剪贴板，一个镜像有多个版本时使用下拉菜单切换。</p>
             </div>
         </header>
         
@@ -371,7 +372,7 @@
         </div>
         
         <footer>
-            <p>数据来源: <code>data.txt</code> | 托管于 GitHub Pages | 点击脚本区域可查看完整内容，然后点击复制按钮复制到剪贴板</p>
+            <p>数据来源: <code>data.txt</code> | 托管于 GitHub Pages | 点击脚本直接复制到剪贴板</p>
         </footer>
     </div>
     
@@ -421,14 +422,17 @@
                     const imageMatch = block.match(/IMAGE:\s*(.+?)\s*==========/s);
                     if (!imageMatch) continue;
                     
-                    // 提取脚本
+                    // 提取脚本 - 修改这里：添加换行符
                     const scriptMatch = block.match(/SCRIPT:\s*([\s\S]+?)\s*==========/s);
                     if (!scriptMatch) continue;
+                    
+                    // 修改：在脚本末尾添加一个换行符
+                    const script = scriptMatch[1].trim() + '\n';
                     
                     entries.push({
                         date: dateMatch[1].trim(),
                         image: imageMatch[1].trim(),
-                        script: scriptMatch[1]
+                        script: script
                     });
                 } catch (err) {
                     console.warn('解析数据块时出错:', err);
@@ -450,27 +454,32 @@
                 {
                     date: "2025-12-29 23:19:12",
                     image: "cm2network/steamcmd",
-                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd steamcmd\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd`
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd steamcmd\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd\n`
+                },
+                {
+                    date: "2025-12-29 23:19:15",
+                    image: "cm2network/steamcmd:latest",
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd:latest\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd:latest steamcmd:latest\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/steamcmd:latest\n`
                 },
                 {
                     date: "2025-12-29 23:32:44",
                     image: "hello-world:latest",
-                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest hello-world:latest\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest`
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest hello-world:latest\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:latest\n`
                 },
                 {
                     date: "2025-12-29 23:37:28",
                     image: "--platform linux/arm64 hello-world:latest",
-                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest linux_arm64_hello-world:latest\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest`
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest linux_arm64_hello-world:latest\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:latest\n`
                 },
                 {
                     date: "2025-12-29 23:45:28",
                     image: "hello-world:linux",
-                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux hello-world:linux\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux`
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux hello-world:linux\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/hello-world:linux\n`
                 },
                 {
                     date: "2025-12-29 23:49:11",
                     image: "--platform linux/arm64 hello-world:linux",
-                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux linux_arm64_hello-world:linux\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux`
+                    script: `docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux\ndocker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux linux_arm64_hello-world:linux\ndocker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux\n`
                 }
             ];
         }
@@ -496,7 +505,16 @@
                     groups[imageName] = [];
                 }
                 
-                groups[imageName].push(item);
+                groups[imageName].push({
+                    date: item.date,
+                    fullImage: item.image,
+                    script: item.script
+                });
+            });
+            
+            // 对每个镜像的版本按日期排序（最新的在前）
+            Object.keys(groups).forEach(imageName => {
+                groups[imageName].sort((a, b) => new Date(b.date) - new Date(a.date));
             });
             
             return groups;
@@ -513,19 +531,20 @@
                     return;
                 }
                 
-                const filteredVersions = groups[imageName].filter(version => {
-                    // 搜索镜像名称、完整镜像字符串或脚本内容
-                    if (searchTerm === '') return true;
-                    
+                // 检查镜像名称或任何版本是否匹配搜索词
+                if (searchTerm) {
                     const searchLower = searchTerm.toLowerCase();
-                    return version.image.toLowerCase().includes(searchLower) || 
-                           version.script.toLowerCase().includes(searchLower) ||
-                           imageName.toLowerCase().includes(searchLower);
-                });
-                
-                if (filteredVersions.length > 0) {
-                    filteredGroups[imageName] = filteredVersions;
+                    const hasMatch = groups[imageName].some(version => 
+                        version.fullImage.toLowerCase().includes(searchLower) || 
+                        version.script.toLowerCase().includes(searchLower)
+                    );
+                    
+                    if (!hasMatch && !imageName.toLowerCase().includes(searchLower)) {
+                        return;
+                    }
                 }
+                
+                filteredGroups[imageName] = groups[imageName];
             });
             
             // 如果没有匹配的结果
@@ -543,33 +562,46 @@
             // 渲染每个镜像组
             let html = '';
             Object.keys(filteredGroups).forEach(imageName => {
+                const versions = filteredGroups[imageName];
+                const hasMultipleVersions = versions.length > 1;
+                
                 html += `
-                    <div class="image-group">
+                    <div class="image-group" data-image="${imageName}">
                         <div class="group-header">
                             <i class="fas fa-cube image-icon"></i>
                             <h3>${imageName}</h3>
                         </div>
-                        <div class="version-list">
                 `;
                 
-                // 添加每个版本
-                filteredGroups[imageName].forEach(version => {
+                // 如果有多个版本，添加版本选择器
+                if (hasMultipleVersions) {
                     html += `
-                        <div class="version-item">
-                            <div class="version-date">
-                                <i class="far fa-calendar-alt"></i>
-                                ${version.date}
-                            </div>
-                            <div class="image-full-name"><strong>完整镜像:</strong> ${version.image}</div>
-                            <div class="version-script" title="点击展开/收起完整脚本">${version.script}</div>
-                            <button class="copy-btn" data-script="${encodeURIComponent(version.script)}">
-                                <i class="far fa-copy"></i> 复制脚本
-                            </button>
+                        <div class="version-selector">
+                            <select class="version-dropdown">
+                                ${versions.map((version, index) => `
+                                    <option value="${index}" ${index === 0 ? 'selected' : ''}>
+                                        ${version.fullImage} (${version.date})
+                                    </option>
+                                `).join('')}
+                            </select>
                         </div>
                     `;
-                });
+                }
                 
+                // 版本信息和脚本区域
                 html += `
+                        <div class="version-info">
+                            <div class="version-date">
+                                <i class="far fa-calendar-alt"></i>
+                                ${versions[0].date}
+                            </div>
+                            <div class="click-to-copy">
+                                <i class="fas fa-mouse-pointer"></i>
+                                点击脚本复制
+                            </div>
+                        </div>
+                        <div class="version-script" data-image="${imageName}" data-version-index="0">
+                            ${versions[0].script}
                         </div>
                     </div>
                 `;
@@ -577,18 +609,38 @@
             
             container.innerHTML = html;
             
-            // 为脚本区域添加点击事件（展开/收起）
+            // 为脚本区域添加点击事件（复制脚本）
             document.querySelectorAll('.version-script').forEach(scriptElement => {
                 scriptElement.addEventListener('click', function() {
-                    this.classList.toggle('expanded');
+                    const script = this.textContent;
+                    copyToClipboard(script);
+                    
+                    // 添加复制成功动画
+                    this.classList.add('copied');
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                    }, 1000);
                 });
             });
             
-            // 为复制按钮添加事件监听器
-            document.querySelectorAll('.copy-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const script = decodeURIComponent(this.getAttribute('data-script'));
-                    copyToClipboard(script);
+            // 为版本下拉菜单添加事件监听器
+            document.querySelectorAll('.version-dropdown').forEach(dropdown => {
+                dropdown.addEventListener('change', function() {
+                    const imageGroup = this.closest('.image-group');
+                    const imageName = imageGroup.getAttribute('data-image');
+                    const versionIndex = this.value;
+                    
+                    // 更新版本信息
+                    const versionInfo = imageGroup.querySelector('.version-info .version-date');
+                    const scriptElement = imageGroup.querySelector('.version-script');
+                    
+                    // 从全局groups中获取数据
+                    const versions = groups[imageName];
+                    const selectedVersion = versions[versionIndex];
+                    
+                    versionInfo.innerHTML = `<i class="far fa-calendar-alt"></i> ${selectedVersion.date}`;
+                    scriptElement.textContent = selectedVersion.script;
+                    scriptElement.setAttribute('data-version-index', versionIndex);
                 });
             });
         }
