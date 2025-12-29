@@ -18,6 +18,45 @@ text
 
 ## 使用方法
 
+### 1. Fork 项目并配置参数
+- 点击项目页面右上角的 **Fork** 按钮，将此项目复制到您的 GitHub 账户下
+- 参考原项目的 README 文档，在您 Fork 后的仓库中配置阿里云相关参数（如访问密钥、镜像仓库地址等）
+
+### 2. 克隆项目到本地
+```bash
+git clone https://github.com/qqqqqq2023/docker_image_pusher.git
+cd docker_image_pusher
+```
+
+### 3. 执行镜像拉取脚本
+```bash
+# 运行脚本并指定要拉取的镜像名称
+sh pull_image.sh <image_name>
+
+# 示例：拉取 nginx 镜像
+sh pull_image.sh nginx:latest
+
+# 示例：拉取 python:3.9-alpin 镜像
+# 默认架构: sh pull_images.sh python:3.9-alpine
+# 指定架构: sh pull_image.sh "--platform linux/arm64 python:3.9-alpine"
+```
+
+### 4. 查看执行结果
+- 脚本会自动触发 GitHub Action 工作流，执行镜像拉取和推送操作
+- 执行结果将被写入到指定文件中，同时显示镜像拉取命令
+
+### 5. 结果展示
+- 若执行成功，GitHub Pages 页面将自动渲染最新的镜像信息
+- 您可以访问 [镜像查询页面](https://qqqqqq2023.github.io/docker_image_pusher/) 查看
+
+### 注意事项
+- 确保在执行脚本前已正确配置所有必要的环境变量和密钥
+- 首次使用 GitHub Pages 可能需要手动在仓库设置中启用
+- 镜像名称需要包含 tag（如 `nginx:latest`），否则将使用默认 tag
+
+
+## GitHub Pages
+
 ### 1. 访问页面
 [镜像查询页面](https://qqqqqq2023.github.io/docker_image_pusher/)
 
@@ -36,6 +75,20 @@ text
 - 在搜索框输入镜像名称或脚本内容进行搜索
 - 支持实时搜索，输入时自动过滤结果
 
+
+## GitHub Action 工作流
+
+### 主要功能
+1. **自动拉取镜像**：根据 `images.txt` 文件中的镜像列表拉取 Docker 镜像
+2. **推送到阿里云**：将拉取的镜像推送到阿里云容器镜像服务
+3. **生成迁移脚本**：自动生成用于从阿里云拉取镜像的脚本
+4. **更新网页数据**：将生成的脚本保存到 `data.txt`，触发页面更新
+
+### 注意事项
+- **重要**：调整运行逻辑时，需要清空 `images.txt` 文件，避免 GitHub Action 执行时导致 Git 冲突
+- 每次执行都会在 `data.txt` 中追加新的脚本，不会覆盖已有数据
+- 页面会自动解析最新的 `data.txt` 文件并展示所有镜像脚本
+
 ## 数据来源
 
 数据来源于 `data.txt` 文件，该文件由 GitHub Action 自动生成，包含以下格式的数据块：
@@ -51,19 +104,6 @@ docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_
 
 ==============================================================================
 ```
-
-## GitHub Action 工作流
-
-### 主要功能
-1. **自动拉取镜像**：根据 `images.txt` 文件中的镜像列表拉取 Docker 镜像
-2. **推送到阿里云**：将拉取的镜像推送到阿里云容器镜像服务
-3. **生成迁移脚本**：自动生成用于从阿里云拉取镜像的脚本
-4. **更新网页数据**：将生成的脚本保存到 `data.txt`，触发页面更新
-
-### 注意事项
-- **重要**：调整运行逻辑时，需要清空 `images.txt` 文件，避免 GitHub Action 执行时导致 Git 冲突
-- 每次执行都会在 `data.txt` 中追加新的脚本，不会覆盖已有数据
-- 页面会自动解析最新的 `data.txt` 文件并展示所有镜像脚本
 
 ## 更新日志
 
