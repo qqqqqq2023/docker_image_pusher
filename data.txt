@@ -57,3 +57,17 @@ docker rmi  crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker
  
 ==========
  
+==============================================================================
+DATE:
+2025-12-29 23:49:11
+==========
+IMAGE:
+--platform linux/arm64 hello-world:linux
+==========
+SCRIPT:
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux linux_arm64_hello-world:linux
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_hello-world:linux
+ 
+==========
+ 
