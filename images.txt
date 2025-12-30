@@ -1,2 +1,2 @@
-# 2025-12-30 python
-python
+# 2025-12-30 nginx
+nginx
