@@ -138,3 +138,17 @@ docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_
  
 ==========
  
+==============================================================================
+DATE:
+2026-01-09 16:52:10
+==========
+IMAGE:
+--platform linux/arm64 linuxserver/ubooquity:3.1.0
+==========
+SCRIPT:
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_ubooquity:3.1.0
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_ubooquity:3.1.0 linux_arm64_ubooquity:3.1.0
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_ubooquity:3.1.0
+ 
+==========
+ 
