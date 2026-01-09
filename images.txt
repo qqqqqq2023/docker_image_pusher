@@ -1,2 +1,2 @@
-# 2026-01-09 dezhao/ubooquity:2.1.2
-dezhao/ubooquity:2.1.2
+# 2026-01-09 --platform linux/arm64 jvmilazz0/kavita:latest
+--platform linux/arm64 jvmilazz0/kavita:latest
