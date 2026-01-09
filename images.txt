@@ -1,2 +1,2 @@
-# 2026-01-09 --platform linux/arm64 difegue/lanraragi
---platform linux/arm64 difegue/lanraragi
+# 2026-01-09 difegue/lanraragi
+difegue/lanraragi
