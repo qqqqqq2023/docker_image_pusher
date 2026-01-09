@@ -1,2 +1,2 @@
-# 2025-12-31 cm2network/steamcmd:root
-cm2network/steamcmd:root
+# 2026-01-09 --platform linux/arm64 linuxserver/ubooquity:3.1.0
+--platform linux/arm64 linuxserver/ubooquity:3.1.0
