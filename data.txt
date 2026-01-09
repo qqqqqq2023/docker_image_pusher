@@ -194,3 +194,17 @@ docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_
  
 ==========
  
+==============================================================================
+DATE:
+2026-01-09 21:50:05
+==========
+IMAGE:
+jvmilazz0/kavita:latest
+==========
+SCRIPT:
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/kavita:latest
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/kavita:latest kavita:latest
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/kavita:latest
+ 
+==========
+ 
