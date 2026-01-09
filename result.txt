@@ -1,0 +1,7 @@
+2026-01-09 17:13:43
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_ubooquity:2.1.2
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_ubooquity:2.1.2 linux_arm64_ubooquity:2.1.2
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_ubooquity:2.1.2
+ 
+==============================================================================
