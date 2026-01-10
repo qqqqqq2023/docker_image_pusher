@@ -1,2 +1,2 @@
-# 2026-01-09 --platform linux/arm64 linuxserver/calibre-web:0.6.25
---platform linux/arm64 linuxserver/calibre-web:0.6.25
+# 2026-01-10 linuxserver/ubooquity:3.1.0
+linuxserver/ubooquity:3.1.0
