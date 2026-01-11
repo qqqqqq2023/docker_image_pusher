@@ -1,2 +1,2 @@
-# 2026-01-11 --platform linux/arm64 portainer/portainer-ce
---platform linux/arm64 portainer/portainer-ce
+# 2026-01-11 portainer/portainer-ce
+portainer/portainer-ce
