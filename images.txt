@@ -1,2 +1,2 @@
-# 2026-01-11 --platform linux/arm64 python:3.9-alpine
---platform linux/arm64 python:3.9-alpine
+# 2026-01-11 --platform linux/arm64 portainer/portainer-ce
+--platform linux/arm64 portainer/portainer-ce
