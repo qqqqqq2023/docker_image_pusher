@@ -320,3 +320,17 @@ docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_
  
 ==========
  
+==============================================================================
+DATE:
+2026-01-11 14:31:28
+==========
+IMAGE:
+portainer/portainer-ce
+==========
+SCRIPT:
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/portainer-ce
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/portainer-ce portainer-ce
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/portainer-ce
+ 
+==========
+ 
