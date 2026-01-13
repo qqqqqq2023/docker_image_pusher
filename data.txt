@@ -334,3 +334,17 @@ docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_
  
 ==========
  
+==============================================================================
+DATE:
+2026-01-13 11:52:32
+==========
+IMAGE:
+--platform linux/arm64 openlistteam/openlist:v4.1.9-ffmpeg
+==========
+SCRIPT:
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_openlist:v4.1.9-ffmpeg
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_openlist:v4.1.9-ffmpeg linux_arm64_openlist:v4.1.9-ffmpeg
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_openlist:v4.1.9-ffmpeg
+ 
+==========
+ 
