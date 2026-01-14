@@ -1,2 +1,2 @@
-# 2026-01-15 teamspeak
-teamspeak
+# 2026-01-15 teamspeak:3.13.7
+teamspeak:3.13.7

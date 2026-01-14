@@ -1,7 +1,0 @@
-2026-01-15 00:35:42
-==============================================================================
-docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/teamspeak
-docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/teamspeak teamspeak
-docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/teamspeak
- 
-==============================================================================
