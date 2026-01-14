@@ -1,2 +1,2 @@
-# 2026-01-13 --platform linux/arm64 openlistteam/openlist:v4.1.9-ffmpeg
---platform linux/arm64 openlistteam/openlist:v4.1.9-ffmpeg
+# 2026-01-15 teamspeak
+teamspeak
