@@ -1,2 +1,2 @@
-# 2026-01-15 mariadb:latest
-mariadb:latest
+# 2026-01-16 ancieque/ts3audiobot
+ancieque/ts3audiobot
