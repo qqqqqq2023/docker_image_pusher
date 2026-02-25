@@ -1,2 +1,2 @@
-# 2026-02-25 --platform linux/arm64 xhongc/music_tag_web:2.6.9
---platform linux/arm64 xhongc/music_tag_web:2.6.9
+# 2026-02-25 --platform linux/arm64 deluan/navidrome:pr-5044
+--platform linux/arm64 deluan/navidrome:pr-5044
