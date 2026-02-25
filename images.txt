@@ -1,2 +1,2 @@
-# 2026-02-25 --platform linux/arm64 deluan/navidrome:pr-5044
---platform linux/arm64 deluan/navidrome:pr-5044
+# 2026-02-25 openlistteam/openlist:v4.1.9-ffmpeg
+openlistteam/openlist:v4.1.9-ffmpeg
