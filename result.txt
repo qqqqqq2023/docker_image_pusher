@@ -1,0 +1,7 @@
+2026-02-25 22:11:14
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/navidrome:pr-5044
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/navidrome:pr-5044 navidrome:pr-5044
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/navidrome:pr-5044
+ 
+==============================================================================

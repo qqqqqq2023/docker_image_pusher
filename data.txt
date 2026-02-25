@@ -460,3 +460,17 @@ docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_
  
 ==========
  
+==============================================================================
+DATE:
+2026-02-25 22:11:14
+==========
+IMAGE:
+deluan/navidrome:pr-5044
+==========
+SCRIPT:
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/navidrome:pr-5044
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/navidrome:pr-5044 navidrome:pr-5044
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/navidrome:pr-5044
+ 
+==========
+ 
