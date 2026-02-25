@@ -1,2 +1,2 @@
-# 2026-01-16 ancieque/ts3audiobot
-ancieque/ts3audiobot
+# 2026-02-25 --platform linux/arm64 xhongc/music_tag_web:2.6.9
+--platform linux/arm64 xhongc/music_tag_web:2.6.9
