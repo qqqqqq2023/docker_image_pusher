@@ -1,0 +1,7 @@
+2026-02-25 09:40:30
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_music_tag_web:2.6.9
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_music_tag_web:2.6.9 linux_arm64_music_tag_web:2.6.9
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_music_tag_web:2.6.9
+ 
+==============================================================================
