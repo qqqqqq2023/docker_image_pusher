@@ -1,2 +1,2 @@
-# 2026-02-25 deluan/navidrome:pr-5044
-deluan/navidrome:pr-5044
+# 2026-02-26 henrygd/beszel:0.18
+henrygd/beszel:0.18
