@@ -1,2 +1,2 @@
-# 2026-02-26 henrygd/beszel:0.18
-henrygd/beszel:0.18
+# 2026-03-15 jfxs/wrangler
+jfxs/wrangler
