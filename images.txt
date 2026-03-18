@@ -1,2 +1,2 @@
-# 2026-03-15 jfxs/wrangler
-jfxs/wrangler
+# 2026-03-18 node:25.8.1
+node:25.8.1

@@ -1,7 +1,0 @@
-2026-03-15 23:13:23
-==============================================================================
-docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/wrangler
-docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/wrangler wrangler
-docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/wrangler
- 
-==============================================================================
