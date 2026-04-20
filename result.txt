@@ -1,0 +1,7 @@
+2026-04-20 14:09:38
+==============================================================================
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/ollama:latest
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/ollama:latest ollama:latest
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/ollama:latest
+ 
+==============================================================================
