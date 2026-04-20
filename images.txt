@@ -1,2 +1,2 @@
-# 2026-04-20 ollama/ollama:latest
-ollama/ollama:latest
+# 2026-04-20 ghcr.io/open-webui/open-webui:ollama
+ghcr.io/open-webui/open-webui:ollama
