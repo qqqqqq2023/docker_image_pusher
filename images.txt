@@ -1,2 +1,2 @@
-# 2026-04-20 ghcr.io/open-webui/open-webui:ollama
-ghcr.io/open-webui/open-webui:ollama
+# 2026-04-20 python:3.10-alpine3.22
+python:3.10-alpine3.22
