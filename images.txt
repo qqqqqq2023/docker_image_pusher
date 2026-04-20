@@ -1,2 +1,2 @@
-# 2026-04-20 zyddnys/manga-image-translator:main
-zyddnys/manga-image-translator:main
+# 2026-04-20 ghcr.io/open-webui/open-webui:main
+ghcr.io/open-webui/open-webui:main
