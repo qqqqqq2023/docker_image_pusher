@@ -1,2 +1,2 @@
-# 2026-03-18 node:25.8.1
-node:25.8.1
+# 2026-04-20 zyddnys/manga-image-translator:main
+zyddnys/manga-image-translator:main
