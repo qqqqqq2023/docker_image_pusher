@@ -1,7 +1,0 @@
-2026-04-20 17:40:35
-==============================================================================
-docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/python:3.10-slim
-docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/python:3.10-slim python:3.10-slim
-docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/python:3.10-slim
- 
-==============================================================================
