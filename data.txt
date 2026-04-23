@@ -670,3 +670,17 @@ docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_
  
 ==========
  
+==============================================================================
+DATE:
+2026-04-23 14:02:18
+==========
+IMAGE:
+--platform linux/arm64 siguremo/yutto:2.2.0
+==========
+SCRIPT:
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_yutto:2.2.0
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_yutto:2.2.0 linux_arm64_yutto:2.2.0
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_yutto:2.2.0
+ 
+==========
+ 
