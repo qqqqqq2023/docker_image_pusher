@@ -642,3 +642,17 @@ docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_
  
 ==========
  
+==============================================================================
+DATE:
+2026-04-23 13:08:32
+==========
+IMAGE:
+--platform linux/arm64 emby/embyserver:4.6.7.0
+==========
+SCRIPT:
+docker pull crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_embyserver:4.6.7.0
+docker tag crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_embyserver:4.6.7.0 linux_arm64_embyserver:4.6.7.0
+docker rmi crpi-m03vbpitsoz3o2xx.cn-guangzhou.personal.cr.aliyuncs.com/q_docker_images/linux_arm64_embyserver:4.6.7.0
+ 
+==========
+ 
