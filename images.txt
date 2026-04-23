@@ -1,2 +1,2 @@
-# 2026-04-22 --platform linux/arm64 linuxserver/cops:4.3.1
---platform linux/arm64 linuxserver/cops:4.3.1
+# 2026-04-23 --platform linux/arm64 emby/embyserver:4.9.1.4
+--platform linux/arm64 emby/embyserver:4.9.1.4
