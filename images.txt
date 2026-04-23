@@ -1,2 +1,2 @@
-# 2026-04-23 --platform linux/arm64 emby/embyserver:4.9.1.4
---platform linux/arm64 emby/embyserver:4.9.1.4
+# 2026-04-23 --platform linux/arm64 emby/embyserver:4.6.7.0
+--platform linux/arm64 emby/embyserver:4.6.7.0
