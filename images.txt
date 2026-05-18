@@ -1,2 +1,2 @@
-# 2026-04-23 --platform linux/arm64 siguremo/yutto:2.2.0
---platform linux/arm64 siguremo/yutto:2.2.0
+# 2026-05-18 --platform linux/arm64 evanqu/jellyfin-library-poster
+--platform linux/arm64 evanqu/jellyfin-library-poster
