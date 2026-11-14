@@ -1,2 +1,2 @@
-# 2026-05-18 --platform linux/arm64 evanqu/jellyfin-library-poster
---platform linux/arm64 evanqu/jellyfin-library-poster
+# 2026-11-14 yacreader/yacreaderlibraryserver:latest-arm64
+yacreader/yacreaderlibraryserver:latest-arm64
