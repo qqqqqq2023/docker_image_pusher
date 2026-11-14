@@ -30,6 +30,23 @@ jobs:
         df -hT
         echo "=============================================================================="
 
+    # ========== 新增：预清理，确保后续 action 能跑起来 ==========
+    - name: Pre-cleanup disk space
+      run: |
+        echo "Pre-cleaning disk space..."
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf /opt/hostedtoolcache/CodeQL
+        sudo rm -rf /usr/local/share/boost
+        sudo rm -rf /usr/lib/jvm
+        sudo rm -rf /usr/local/lib/node_modules
+        sudo rm -rf /usr/local/share/chromium
+        sudo docker system prune -af || true
+        echo "Pre-cleanup done"
+        df -hT
+    # ==========================================================
+
     # 增加可用磁盘空间
     - name: Maximize build space
       uses: easimon/maximize-build-space@master
@@ -40,8 +57,8 @@ jobs:
         remove-dotnet: 'true'
         remove-haskell: 'true'
         # 如果空间还是不够用，可以把以下开启，清理出更多空间
-        # remove-android: 'true'
-        # remove-codeql: 'true'
+        remove-android: 'true'
+        remove-codeql: 'true'
         build-mount-path: '/var/lib/docker/'
 
     - name: Restart docker
@@ -184,12 +201,14 @@ jobs:
             echo "=============================================================================="
             df -hT
             echo "=============================================================================="
-            docker rmi $image
-            docker rmi $new_image
+            docker rmi $image || true
+            docker rmi $new_image || true
+            docker image prune -f || true
+            docker builder prune -f || true
             echo "磁盘空间清理完毕"
             echo "=============================================================================="
             df -hT
-            echo "=============================================================================="     
+            echo "=============================================================================="  
             
         done < images.txt
 
